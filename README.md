@@ -22,7 +22,7 @@ layout:
 
 <figure><img src=".gitbook/assets/myCorne.png" alt=""><figcaption><p>Corne - typeractive</p></figcaption></figure>
 
-Now to use more the keyboard instead the trackpad was ending up to search for a better windows managemnt for _OSX._&#x20;
+"I ended up searching for better window management for macOS to use the keyboard more instead of the trackpad"
 
 _yabai_ and _skhd_ comes in the place now.
 

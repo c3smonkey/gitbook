@@ -4,7 +4,7 @@ description: zmk-config
 
 # ZMK Firmware Configuration
 
-I got some support from @minusfive and forked his repository to add my changes and also add some other _nice-view_ configuration like animations where I got also from the community in discord.
+“I received some support from @minusfive and forked their repository to add my changes. I also added some nice visual configurations, such as animations, which I learned about from the community on Discord.”.
 
 {% embed url="https://github.com/c3smonkey/zmk-config/tree/cat" %}
 
