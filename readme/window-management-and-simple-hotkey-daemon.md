@@ -1,10 +1,84 @@
 ---
-description: simple hotkey daemon
+description: '- yabai & skhd -'
 ---
 
-# skhd
+# window management & simple hotkey daemon
 
-## Change Focus
+## Brew install
+
+```bash
+brew install koekeishiya/formulae/skhd
+brew install koekeishiya/formulae/yabai
+```
+
+## Config files
+
+```bash
+~/.config/yabai/yabairc
+~/.config/skhd/skhdrc
+```
+
+### yabairc
+
+{% code lineNumbers="true" %}
+```bash
+
+# global settings
+yabai -m config mouse_follows_focus          off
+yabai -m config focus_follows_mouse          off
+yabai -m config window_origin_display        default
+yabai -m config window_placement             second_child
+yabai -m config window_topmost               off
+yabai -m config window_shadow                on
+yabai -m config window_opacity               off
+yabai -m config window_opacity_duration      0.0
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.90
+yabai -m config window_border                on
+yabai -m config window_border_width          2
+# https://convertingcolors.com/hex-color-FF00FF.html?search=Hex(FF00FF)
+yabai -m config active_window_border_color   0xFF39FF14
+yabai -m config normal_window_border_color   0xff555555
+yabai -m config insert_feedback_color        0xffd75f5f
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 off
+yabai -m config mouse_modifier               fn
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+# general space settings
+yabai -m config layout                       bsp
+yabai -m config top_padding                  15
+yabai -m config bottom_padding               15
+yabai -m config left_padding                 15
+# NOTE: for OBS floating head
+# yabai -m config left_padding                 450
+yabai -m config right_padding                15
+yabai -m config window_gap                   15
+
+# apps to not manage (ignore)
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Archive Utility$" manage=off
+yabai -m rule --add app="Raycast" manage=off
+yabai -m rule --add app="^Music$" manage=off
+#yabai -m rule --add app="^IntelliJ IDEA$" manage=off
+yabai -m rule --add app="Toolbox$" manage=off
+#yabai -m rule --add app="Android Studio$" manage=off
+yabai -m rule --add app="^1Password 7$" manage=off
+
+echo "yabai configuration loaded.."
+
+
+```
+{% endcode %}
+
+
+
+### zkhdrc
+
+#### Change Focus
 
 {% code fullWidth="false" %}
 ```bash
@@ -24,7 +98,7 @@ shift + ctrl + alt - n : yabai -m window --focus prev || yabai -m window --focus
 ```
 {% endcode %}
 
-## Change Layout
+#### Change Layout
 
 {% code fullWidth="false" %}
 ```bash
@@ -55,7 +129,7 @@ alt - m : yabai -m window --toggle zoom-fullscreen
 ```
 {% endcode %}
 
-## Change Size
+#### Change Size
 
 {% code fullWidth="false" %}
 ```bash
@@ -71,7 +145,7 @@ shift + ctrl + alt - l : yabai -m window --resize right:20:0 ; yabai -m window -
 ```
 {% endcode %}
 
-## Move Window
+#### Move Window
 
 {% code fullWidth="false" %}
 ```bash
@@ -116,7 +190,7 @@ shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
 ```
 {% endcode %}
 
-## Start- Stop and Restart yabai
+#### Start- Stop and Restart yabai
 
 {% code fullWidth="false" %}
 ```bash
@@ -130,7 +204,7 @@ ctrl + alt - r : yabai --restart-service
 ```
 {% endcode %}
 
-## OSX Hacks
+#### OSX Hacks
 
 <pre class="language-bash" data-full-width="false"><code class="lang-bash"><strong>~/.config/skhd/skhdrc
 </strong><strong>
