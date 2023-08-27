@@ -1,4 +1,3 @@
 # Table of contents
 
-* [CRKBD  - Corne Keyboard](README.md)
-
+* [🐇 CRKBD - Corne Keyboard](README.md)
