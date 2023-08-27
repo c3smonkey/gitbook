@@ -20,6 +20,8 @@ layout:
 
 # 🐇 CRKBD - Corne Keyboard
 
-
-
 <figure><img src=".gitbook/assets/myCorne.png" alt=""><figcaption><p>Corne - typeractive </p></figcaption></figure>
+
+The kit can be ordert on [https://typeractive.xyz](https://typeractive.xyz)\
+
+https://c3smonkey.gitbook.io/gitbook/
