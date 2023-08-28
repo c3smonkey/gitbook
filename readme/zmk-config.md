@@ -1,5 +1,5 @@
 ---
-description: zmk-config
+description: '- zmk-config -'
 ---
 
 # ZMK Firmware Configuration

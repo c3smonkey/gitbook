@@ -20,11 +20,8 @@ brew install koekeishiya/formulae/yabai
 
 ### yabairc
 
-{% code lineNumbers="true" %}
-```bash
-
-# global settings
-yabai -m config mouse_follows_focus          off
+<pre class="language-bash" data-line-numbers><code class="lang-bash"><strong># global settings
+</strong>yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off
 yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
@@ -71,12 +68,11 @@ yabai -m rule --add app="^1Password 7$" manage=off
 echo "yabai configuration loaded.."
 
 
-```
-{% endcode %}
+</code></pre>
 
 
 
-### zkhdrc
+### skhdrc
 
 #### Change Focus
 
