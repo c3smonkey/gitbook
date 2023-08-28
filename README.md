@@ -1,5 +1,5 @@
 ---
-description: The mechanical keyboard rabbit hole.
+description:  ' - The mechanical keyboard rabbit hole. - '
 cover: .gitbook/assets/Still life of a bunny on exoplanet in heaven.jpg
 coverY: 0
 layout:
