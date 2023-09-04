@@ -20,8 +20,12 @@ brew install koekeishiya/formulae/yabai
 
 ### yabairc
 
-<pre class="language-bash" data-line-numbers><code class="lang-bash"><strong># global settings
-</strong>yabai -m config mouse_follows_focus          off
+{% code lineNumbers="true" %}
+```bash
+#!/usr/bin/env sh
+
+# global settings
+yabai -m config mouse_follows_focus          on
 yabai -m config focus_follows_mouse          off
 yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
@@ -35,6 +39,7 @@ yabai -m config window_border                on
 yabai -m config window_border_width          2
 # https://convertingcolors.com/hex-color-FF00FF.html?search=Hex(FF00FF)
 yabai -m config active_window_border_color   0xFF39FF14
+#yabai -m config active_window_border_color   0xFF91BAF8
 yabai -m config normal_window_border_color   0xff555555
 yabai -m config insert_feedback_color        0xffd75f5f
 yabai -m config split_ratio                  0.50
@@ -58,58 +63,105 @@ yabai -m config window_gap                   15
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Archive Utility$" manage=off
+yabai -m rule --add app="^Logi Options$" manage=off
 yabai -m rule --add app="Raycast" manage=off
 yabai -m rule --add app="^Music$" manage=off
-#yabai -m rule --add app="^IntelliJ IDEA$" manage=off
+yabai -m rule --add app="^IntelliJ IDEA$" manage=off
 yabai -m rule --add app="Toolbox$" manage=off
-#yabai -m rule --add app="Android Studio$" manage=off
+yabai -m rule --add app="Android Studio$" manage=off
 yabai -m rule --add app="^1Password 7$" manage=off
+yabai -m rule --add app="^Messages$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
 
 echo "yabai configuration loaded.."
-
-
-</code></pre>
+```
+{% endcode %}
 
 
 
 ### skhdrc
 
-#### Change Focus
+#### Launch Commands
 
 {% code fullWidth="false" %}
 ```bash
-~/.config/skhd/skhdrc
-
-# -- Changing Window Focus --
-# change window focus within space
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - h : yabai -m window --focus west
-alt - l : yabai -m window --focus east
-
-# change window focus cycle forwards
-ctrl + alt - n : yabai -m window --focus next || yabai -m window --focus first
-# change window focus cycle backwards
-shift + ctrl + alt - n : yabai -m window --focus prev || yabai -m window --focus last
+# === Launch Commands ===
+# Start IntelliJ IDEA Ultimate
+cmd + shift - i : osascript -e "tell application \"/Users/$USER/Applications/IntelliJ IDEA Ultimate.app\" to activate"
+# Start Safari
+cmd + shift - s : osascript -e "tell application \"Safari\" to activate"
+# Start Warp
+cmd + shift - w : osascript -e "tell application \"Warp\" to activate"
 ```
 {% endcode %}
 
-#### Change Layout
+#### Navigation
 
 {% code fullWidth="false" %}
 ```bash
-~/.config/skhd/skhdrc
+# === Navigation ===
+# move window to space #
+ctrl + alt - 1 : yabai -m window --space 1
+ctrl + alt - 2 : yabai -m window --space 2
+ctrl + alt - 3 : yabai -m window --space 3
+ctrl + alt - 4 : yabai -m window --space 4
+ctrl + alt - 5 : yabai -m window --space 5
+ctrl + alt - 6 : yabai -m window --space 6
+ctrl + alt - 7 : yabai -m window --space 7
+ctrl + alt - 8 : yabai -m window --space 8
+ctrl + alt - 9 : yabai -m window --space 9
+ctrl + alt - 0 : yabai -m window --space 10
+# move window to prev and next space
+ctrl + alt - p : yabai -m window --space prev;
+ctrl + alt - n : yabai -m window --space next;
 
+# change window focus within space
+cmd - h : yabai -m window --focus west
+cmd - j : yabai -m window --focus south
+cmd - k : yabai -m window --focus north
+cmd - l : yabai -m window --focus east
+# support also arrows
+cmd - left : yabai -m window --focus west
+cmd - down : yabai -m window --focus south
+cmd - up : yabai -m window --focus north
+cmd - right : yabai -m window --focus east
+
+
+
+```
+{% endcode %}
+
+#### Moving Windows Around
+
+{% code fullWidth="false" %}
+```bash
+# -- Moving Windows Around --
+# swap windows
+shift + cmd - j : yabai -m window --swap south
+shift + cmd - k : yabai -m window --swap north
+shift + cmd - h : yabai -m window --swap west
+shift + cmd - l : yabai -m window --swap east
+
+# move window and split
+ctrl + cmd - j : yabai -m window --warp south
+ctrl + cmd - k : yabai -m window --warp north
+ctrl + cmd - h : yabai -m window --warp west
+ctrl + cmd - l : yabai -m window --warp east
+```
+{% endcode %}
+
+#### Modifying  Window
+
+{% code fullWidth="false" %}
+```bash
 # -- Modifying the Layout --
 # rotate windows clockwise / anticlockwise
 alt - r         : yabai -m space --rotate 270
 shift + alt - r : yabai -m space --rotate 90
 
-# flip along y-axis
-alt - y : yabai -m space --mirror y-axis
-
-# flip along x-axis
+# rotate on X and Y axis
 alt - x : yabai -m space --mirror x-axis
+alt - y : yabai -m space --mirror y-axis
 
 # toggle window float
 alt - t : yabai -m window --toggle float --grid 4:4:1:1:20:20
@@ -121,94 +173,64 @@ alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 alt - m : yabai -m window --toggle zoom-fullscreen
 
 # balance out tree of windows (resize to occupy same area)
- alt - b : yabai -m space --balance
+alt - b : yabai -m space --balance
+
+# balance out tree of windows (resize to occupy same area)
+alt - b : yabai -m space --balance 
+
+# set insertion point for focused container
+shift + ctrl + alt - h : yabai -m window --insert west
+shift + ctrl + alt - j : yabai -m window --insert south
+shift + ctrl + alt - k : yabai -m window --insert north
+shift + ctrl + alt - l : yabai -m window --insert east
+
+# change window sizes and border color
+# define border color 
+:: resize @ : yabai -m config active_window_border_color 0xFFFF00FF
+#:: default : yabai -m config active_window_border_color 0xFF91BAF8
+:: default : yabai -m config active_window_border_color  0xFF39FF14
+# toggle mode 
+resize < hyper - r ; default
+default < hyper - r ; resize
+# change wind:w
+# ow size
+resize < h : yabai -m window --resize left:-50:0; yabai -m window --resize right:-50:0
+resize < j : yabai -m window --resize bottom:0:50; yabai -m window --resize top:0:50
+resize < k   : yabai -m window --resize top:0:-50; yabai -m window --resize bottom:0:-50
+resize < l : yabai -m window --resize right:50:0; yabai -m window --resize left:50:0
+# support also arrows
+resize < left : yabai -m window --resize left:-50:0; yabai -m window --resize right:-50:0
+resize < down : yabai -m window --resize bottom:0:50; yabai -m window --resize top:0:50
+resize < up   : yabai -m window --resize top:0:-50; yabai -m window --resize bottom:0:-50
+resize < right : yabai -m window --resize right:50:0; yabai -m window --resize left:50:0
 ```
 {% endcode %}
 
-#### Change Size
+#### Manage yabai & skhd
 
 {% code fullWidth="false" %}
 ```bash
-~/.config/skhd/skhdrc
-
-# -- Modifying Window Size --
-# change window sizes
-shift + ctrl + alt - h : yabai -m window --resize left:-20:0 ; yabai -m window --resize right:-20:0
-shift + ctrl + alt - j : yabai -m window --resize bottom:0:20 ; yabai -m window --resize top:0:20
-shift + ctrl + alt - k : yabai -m window --resize top:0:-20 ; yabai -m window --resize bottom:0:-20
-shift + ctrl + alt - l : yabai -m window --resize right:20:0 ; yabai -m window --resize left:20:0
-
-```
-{% endcode %}
-
-#### Move Window
-
-{% code fullWidth="false" %}
-```bash
-~/.config/skhd/skhdrc
-
-# -- Moving Windows Around --
-# swap windows
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - h : yabai -m window --swap west
-shift + alt - l : yabai -m window --swap east
-
-# move window and split
-ctrl + alt - j : yabai -m window --warp south
-ctrl + alt - k : yabai -m window --warp north
-ctrl + alt - h : yabai -m window --warp west
-ctrl + alt - l : yabai -m window --warp east
-
-# move window to prev and next space
-shift + alt - p : yabai -m window --space prev;
-shift + alt - n : yabai -m window --space next;
-
-# move window to space #
-shift + alt - 1 : yabai -m window --space 1;
-shift + alt - 2 : yabai -m window --space 2;
-shift + alt - 3 : yabai -m window --space 3;
-shift + alt - 4 : yabai -m window --space 4;
-shift + alt - 5 : yabai -m window --space 5;
-shift + alt - 6 : yabai -m window --space 6;
-shift + alt - 7 : yabai -m window --space 7;
-
-# swap managed window
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - h : yabai -m window --swap west
-shift + alt - l : yabai -m window --swap east
-
-# move window to display left and right
-shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
-shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
-
-```
-{% endcode %}
-
-#### Start- Stop and Restart yabai
-
-{% code fullWidth="false" %}
-```bash
-~/.config/skhd/skhdrc
-
-# -- Starting/Stopping/Restarting Yabai --
+# -- Manage yabai and skhd --
 # stop/start/restart yabai
 ctrl + alt - q : yabai --stop-service
 ctrl + alt - s : yabai --start-service
 ctrl + alt - r : yabai --restart-service
+# Reload skhd configuration
+shift + cmd - r : skhd --reload
+
 ```
 {% endcode %}
 
-#### OSX Hacks
+#### Disable OSX built-in mappings
 
-<pre class="language-bash" data-full-width="false"><code class="lang-bash"><strong>~/.config/skhd/skhdrc
-</strong><strong>
-</strong><strong># -- osx hacks --
-</strong># disable osx hide window
+{% code fullWidth="false" %}
+```bash
+# -- disable some OSX built-in key mappings --
+# disable osx hide window
 cmd - h : :
 # disable osx minimize window
 alt + cmd - m : :
 cmd - m : :
-</code></pre>
+```
+{% endcode %}
 
