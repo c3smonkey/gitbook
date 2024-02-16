@@ -1,10 +1,24 @@
 ---
 description: '- Raspberry Pi Kubernetes Cluster with k3s -'
+cover: .gitbook/assets/rpi-k3s-cluster.jpeg
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # MiniIO - Kubernetes Cluster
-
-
 
 First, add the Minio Helm chart repository:
 
@@ -12,7 +26,7 @@ First, add the Minio Helm chart repository:
 helm repo add minio https://charts.min.io/
 ```
 
-Next, install _MiniIO_ using _Helm_ with the desired configuration options:
+![rpi-k3s-cluster.jpeg](https://www.gitbook.com/cdn-cgi/image/width=32,dpr=2,format=auto/https%3A%2F%2Ffiles.gitbook.com%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%2FksNzGarwZ6lTZUvW2BsD%2Fuploads%2FlnCfljPnBM1IJOv8X8NX%2Frpi-k3s-cluster.jpeg%3Falt%3Dmedia%26token%3D7bedfac2-d6b2-41ce-90f1-ab4368229656)Next, install _MiniIO_ using _Helm_ with the desired configuration options:
 
 ```
 helm install --set resources.requests.memory=512Mi --set replicas=1 --set persistence.enabled=false --set mode=standalone --set rootUser=rootuser,rootPassword=rootpass123 --generate-name minio/minio
